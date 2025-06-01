@@ -6,7 +6,7 @@ In this note, I want to review and document how to set up OAuth2 for a Django RE
 
 ### Register Your Application with the OAuth Provider 
 Google:
-- Create a project in [Google API Console](https://console.developers.google.com/) 
+- Create a project in [Google API Console]
 - Create "OAuth client ID" to obtain OAuth 2.0 credentials
     - Choose the "Web application" type and give it a name
     - Add authorized redirect URI(s)<sup>*</sup> such as `http://localhost:8000/complete/google-oauth2/`
@@ -15,7 +15,7 @@ Google:
 <sup>*</sup> The redirect URI is where Google sends responses to your authentication requests.
 
 Facebook:
-- Create an app/ product in the [Facebook platform for developers](https://developers.facebook.com/apps/)
+- Create an app/ product in the [Facebook platform for developers]
 - Go to Settings | Basic
     - Set the App Domains to the valid domain(s) such as localhost (not 127.0.0.1)
     - Add a website as a platform and set the site URL to `http://localhost:8000/`
@@ -41,14 +41,10 @@ Facebook:
 5. If the user has not done so already, the OAuth provider presents a question like "Do you want to login to this site..." type of information and asks for user confirmation.
 6. The user either confirms or denies the auth request.
 7. If the user denies the request, the OAuth provider will redirect them back to the redirect URI provided in the request (redirect_uri).
-    ```
-    http://mysite.com/comeBack.cgi
-       ?error=access_denied
-    ```
 8. If the user confirms the request, the OAuth provider redirects the user back to your web-server with a `code` using the callback URL provided.
 9. Web-server calls the OAuth provider directly and exchange `code` for an `access token` to validate the `code`.
     ```
-    POST https://www.googleapis.com/oauth2/v4/token
+    POST
     ?code=CODE
     &client_id=CLIENT_ID
     &client_secret=CLIENT_SECRET
@@ -169,7 +165,7 @@ Then, you can call the following API by providing the parameters in the request 
 ```http://127.0.0.1:8000/api/accounts/oauth/login/```
 
 Google:
-- In [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/):
+- In [OAuth 2.0 Playground]
     - Step 1: I used Google+ APIs for email and profile info. Click on 'Authorize APIs' and then, confirm the consent form. It will return an `Authorization code` which is the `code` that is supposed to return using the callback URL. 
     - Step 2: Click on 'Exchange authorization code for token'. It will return an `access token` that you can use to call the API using the back-end.
 ```json
@@ -180,7 +176,7 @@ Google:
 ```
 
 Facebook:
-- You can use `User Token` from [this link](https://developers.facebook.com/tools/accesstoken) as an `access token`.
+- You can use `User Token` from [this link] as an `access token`.
 ```json
 {
 "provider":"facebook",
